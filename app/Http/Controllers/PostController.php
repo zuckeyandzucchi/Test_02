@@ -7,15 +7,10 @@ use App\Models\Post;
 
 class PostController extends Controller
 {
-    /**
-     * Post一覧を表示する
-     * 
-     * @param Post Postモデル
-     * @return array Postモデルリスト
-     */
-    public function index(Post $post)//インポートしたPostをインスタンス化して$postとして使用。
+    public function index(Post $post)
     {
-        return $post->get();//$postの中身を戻り値にする。
-    }
-} 
-  
+        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
+    } 
+    //getPaginateByLimit()はPost.phpで定義したメソッドです。
+}
+?>
