@@ -26,5 +26,5 @@
     // '/posts/{対象データのID}'にGetリクエストが来たら、PostControllerのshowメソッドを実行する
     Route::put('/posts/{post}', [PostController::class, 'update']); 
     
-    
+    Route::delete('/posts/{post}', [PostController::class,'delete']);
 ?>
