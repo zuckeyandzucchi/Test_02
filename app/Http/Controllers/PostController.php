@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 use App\Http\Requests\PostRequest; // useする
 
 class PostController extends Controller
@@ -16,10 +17,12 @@ class PostController extends Controller
     // showメソッド
     public function show(Post $post)
     {
+    // $item = Post::find($post);
+    // dd($post);
      return view('posts.show')->with(['post' => $post]);
         
     }
-    
+
     // createメソッド
     public function create()
     {
@@ -30,7 +33,10 @@ class PostController extends Controller
     public function store(Post $post, PostRequest $request) // 引数をRequestからPostRequestにする
     {
         $input = $request['post'];
+        dd($_GET);
+        // 上と同じこと
         $post->fill($input)->save();
+        // 繋げて書いてるだけ。
         return redirect('/posts/' . $post->id);
     }
     
@@ -43,7 +49,7 @@ class PostController extends Controller
     {
         $input_post = $request['post'];
         $post->fill($input_post)->save();
-     return redirect('/posts/' . $post->id);
+        return redirect('/posts/' . $post->id);
     }
     
     public function delete(Post $post)
