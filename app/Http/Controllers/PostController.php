@@ -1,11 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
-use App\Http\Requests\PostRequest; // useする
+use App\Models\Category;
+use App\Http\Requests\PostRequest; 
 
 class PostController extends Controller
 {
@@ -20,20 +20,20 @@ class PostController extends Controller
     // $item = Post::find($post);
     // dd($post);
      return view('posts.show')->with(['post' => $post]);
-        
+    
     }
-
-    // createメソッド
-    public function create()
+    // createメソッド public function create(){return view('posts.create');}
+    public function create(Category $category)
     {
-        return view('posts.create');
+        return view('posts.create')->with(['categories' => $category->get()]);
+        // $category->get()　には何が入ってるの？
     }
-
+    
     // storeメソッド
     public function store(Post $post, PostRequest $request) // 引数をRequestからPostRequestにする
     {
         $input = $request['post'];
-        dd($_GET);
+        // dd($_GET);
         // 上と同じこと
         $post->fill($input)->save();
         // 繋げて書いてるだけ。
