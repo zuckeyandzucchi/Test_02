@@ -6,8 +6,6 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </x-slot>
-    
-    <body>
         <a href='/posts/create'>投稿する</a>
         <div></div>
         <div class='posts'>
@@ -40,6 +38,17 @@
             }
         }
         </script>
+        
+        <div>
+            @foreach($questions as $question)
+                <div>
+                    <a href="https://teratail.com/questions/{{ $question['id'] }}">
+                        【質問】{{ $question['title'] }}
+                    </a>
+                </div>
+            @endforeach
+        </div>
+        
         <div>
             ログインユーザー:　{{ Auth::user()->name }}
         </div>
